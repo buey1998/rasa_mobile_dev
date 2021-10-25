@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1090537252505",
+    "project_id": "testpokemon-bc35f",
+    "storage_bucket": "testpokemon-bc35f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090537252505:android:51f1fcc97c89bf095c7a08",
+        "android_client_info": {
+          "package_name": "com.example.bueytest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090537252505-6760rcjneqgjr60uao8od1e5kvri24eb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu_UYUWm_J6YmtZBFzhRz1PbiilHvKXhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090537252505-6760rcjneqgjr60uao8od1e5kvri24eb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
