@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:bueytest/bloc/authentication_bloc.dart';
 import 'package:bueytest/style/textstyle.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,8 +15,31 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  TextEditingController fullnameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmController = TextEditingController();
   AuthenticationBloc authenticationBloc = AuthenticationBloc();
   late String fullname, email, password;
+
+  signUp() {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmController.text.trim();
+    if (password == confirmPassword && password.length >= 6) {
+      _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((user) {
+        print("Sign up user successful.");
+      }).catchError((error) {
+        print(error.message);
+      });
+    } else {
+      print("Password and Confirm-password is not match.");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +77,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: Colors.white,
                 ),
                 TextField(
+                  controller: emailController,
                   style: bl113Style,
-                  onChanged: (value) => email = value,
+                  onChanged: (value) =>
+                      emailController = value as TextEditingController,
                   decoration: InputDecoration(
                     hintText: 'Email',
                     hintStyle: bl113Style,
@@ -64,8 +92,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: Colors.white,
                 ),
                 TextField(
+                  controller: passwordController,
                   style: bl113Style,
-                  onChanged: (value) => password = value,
+                  onChanged: (value) =>
+                      passwordController = value as TextEditingController,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     hintStyle: bl113Style,
@@ -77,6 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: Colors.white,
                 ),
                 TextField(
+                  controller: confirmController,
                   style: bl113Style,
                   decoration: InputDecoration(
                     hintText: 'Confirm Password',
@@ -136,7 +167,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: wt15Style,
                     ),
                     onPressed: () {
-                      authenticationBloc.add(SignUp(fullname, email, password));
+                      signUp();
+                      // authenticationBloc.add(SignUp(fullname, email, password));
                       // Navigator.push(context,
                       //     MaterialPageRoute(builder: (context) => APIPage()));
                     },

@@ -25,7 +25,8 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => APIPage(user: _auth.currentUser!.uid)));
+              // builder: (context) => APIPage(user: _auth.currentUser!.uid)));
+              builder: (context) => APIPage(user: email)));
       // print("signed in ${user.email}");
     }).catchError((error) {
       print('error------$error');
@@ -40,7 +41,8 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => APIPage(user: _auth.currentUser!.uid)));
+                // builder: (context) => APIPage(user: _auth.currentUser!.uid)));
+                builder: (context) => APIPage(user: email)));
       });
     }
   }
